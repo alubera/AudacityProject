@@ -51,7 +51,8 @@ Track::Track(DirManager * projDirManager)
    mLinked    = false;
    mMute      = false;
    mSolo      = false;
-
+ 
+   mNumTimesSelected = 0;
    mY = 0;
    mHeight = 150;
    mIndex = 0;
@@ -89,7 +90,7 @@ void Track::Init(const Track &orig)
 {
    mDefaultName = orig.mDefaultName;
    mName = orig.mName;
-
+   mNumTimesSelected = orig.mNumTimesSelected;
    if (mDirManager != orig.mDirManager) {
       if (mDirManager) {
          mDirManager->Deref(); // MM: unreference old DirManager

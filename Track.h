@@ -72,8 +72,10 @@ class AUDACITY_DLL_API Track: public XMLTagHandler
    bool           mMinimized;
 
  public:
+	int 				mNumTimesSelected;
    wxSize vrulerSize;
-
+   //int GetNumSelected() { return mNumTimesSelected; }
+	//void SetNumSelected(int x) { mNumTimesSelected = x; }
    // This just returns a constant and can be overriden by subclasses
    // to specify a different height for the case that the track is minimized.
    virtual int GetMinimizedHeight() const;
@@ -87,7 +89,7 @@ class AUDACITY_DLL_API Track: public XMLTagHandler
    int GetHeight(bool vStereo = false) const;
    void SetHeight(int h, bool vStereo = false);
 #else
-   int GetY() const;
+   int  GetY() const;
    void SetY(int y);
    int GetHeight() const;
    void SetHeight(int h);
