@@ -207,6 +207,7 @@ void ControlToolBar::RegenerateToolsTooltips()
                strKey += pCmdMgr->GetKeyFromName(wxT("Play"));
                strKey += _(") / Loop Play (");
                strKey += pCmdMgr->GetKeyFromName(wxT("PlayLooped"));
+					//std::cout << "play clicked\n";
                break;
             case ID_RECORD_BUTTON:
                strKey += pCmdMgr->GetKeyFromName(wxT("Record"));
@@ -712,8 +713,23 @@ void ControlToolBar::OnKeyEvent(wxKeyEvent & event)
 
 void ControlToolBar::OnPlay(wxCommandEvent & WXUNUSED(evt))
 {
+   
+   AudacityProject *pr = GetActiveProject();
+	TrackList *t = pr->GetTracks();
+   TrackListIterator it(t);
+   std::cout << "playing\n";
+   
+   for (Track *tt = it.First(); tt; tt = it.Next()) {
+     
+		if (tt->GetSelected()) {
+			tt->mNumTimesSelected += 1;
+			 std::cout << "track name is " << tt->GetName() << " selected is " << tt->GetSelected() << " numPlays is " << tt->mNumTimesSelected << std::endl;
+			break;
+		}
+   }
+	
    StopPlaying();
-
+   
    AudacityProject *p = GetActiveProject();
    if (p) p->TP_DisplaySelection();
 
